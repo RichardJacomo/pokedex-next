@@ -1,0 +1,25 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    align-items: center;
+    padding: 20px 10px;
+    position: fixed; 
+    width: 100%;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+    margin-right: 40px;
+}
+
+.navbar a:hover{
+    color: rgb(177, 177, 177);
+}
+
+.navbar ul{
+    display: flex;
+    justify-content: space-between;
+}
