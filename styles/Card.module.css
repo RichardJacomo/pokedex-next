@@ -1,0 +1,33 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid  rgb(225, 65, 65);
+    width: 150px;
+    border-radius: 10px;
+    background-color: #303030;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.card:hover{
+    background-color: rgb(225, 65, 65);
+}
+
+.title{
+    font-size: 20px;
+    color: white;
+    margin: 10px 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.link{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.id{
+    margin: 10px 0;
+}

@@ -1,0 +1,152 @@
+.pokemon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #303030;
+    border-bottom:2px solid #ff0000;
+}
+
+.name{
+    font-size: 36px;
+    text-transform: capitalize;
+    padding: 50px 0 30px 0;
+    color: white;
+}
+
+.figure{
+    background-color: #c3824d;
+    width: 100%;
+    height: 500px;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.description{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.info{
+    background-color: rgba(0, 0, 0, 0.312);
+    width: 80%;
+    border-radius: 10px;
+    border: 2px solid #ff0000;
+}
+
+.types{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.type{
+    color: white;
+    font-size: 20px;
+    padding: 4px 20px;
+    background-color: rgb(79, 79, 196);
+    border-radius: 10px;
+    text-transform: capitalize;
+}
+
+.size{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.size p{
+    font-size: 16px;
+}
+
+.weight{
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.height{
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stats{
+    color: white;
+    font-size: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.hp, .attack, .defense, .speed{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 5px 20px 5px 20px;
+}
+
+.hp, .attack, .defense, .speed h3{
+    font-size: 20px;
+}
+
+.bar{
+    width: 80%;
+    height: 20px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    position: relative;
+}  
+
+.speed_bar, .hp_bar, .attack_bar, .defense_bar {
+    height: 20px;
+    border-radius: 10px;
+}
+
+.bar p{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    -webkit-text-stroke: 0.2px black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+.hp_bar {
+    background-color: rgb(198, 50, 50);
+}
+
+.attack_bar {
+    background-color: rgb(164, 138, 35);
+}
+
+.defense_bar {
+    background-color: rgb(84, 92, 247);
+}
+
+.speed_bar {
+    background-color: rgb(40, 136, 55);
+}
+

@@ -1,8 +1,19 @@
 .home {
+    padding-top: 150px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
+  }
+
+  .ul_list {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 80%;
   }
