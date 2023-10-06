@@ -1,9 +1,10 @@
 import styles from '../../styles/Pokemon.module.css'
 import Image from 'next/image'
 import getColor from '../../components/getColor'
+import { useRouter } from 'next/router'
 
 export async function getStaticPaths() {
-    const maxPokemons = 100
+    const maxPokemons = 50
     const url = 'https://pokeapi.co/api/v2/pokemon/'
     const res = await fetch(`${url}?&limit=${maxPokemons}`)
     const data = await res.json()
@@ -16,7 +17,7 @@ export async function getStaticPaths() {
     })
     return {
         paths,
-        fallback: false
+        fallback: true
     }
 }
 
@@ -32,6 +33,12 @@ export async function getStaticProps(context) {
 }
 
 export default function Pokemon({ pokemon }) {
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <div>Carregando...</div>
+    }
+
     return (
         <main className={styles.pokemon}>
             <figure className={styles.figure} style={{backgroundColor: getColor(pokemon)}}>
@@ -63,28 +70,28 @@ export default function Pokemon({ pokemon }) {
                         <div className={styles.hp}>
                             <h3>HP</h3>
                             <div className={styles.bar}>
-                                <p>{pokemon.stats[0].base_stat}/100</p>
+                                <p>{pokemon.stats[0].base_stat}</p>
                                 <div className={styles.hp_bar} style={{ width: `${pokemon.stats[0].base_stat}%` }}></div>
                             </div>
                         </div>
                         <div className={styles.attack}>
                             <h3>Attack</h3>
                             <div className={styles.bar}>
-                                <p>{pokemon.stats[1].base_stat}/100</p>
+                                <p>{pokemon.stats[1].base_stat}</p>
                                 <div className={styles.attack_bar} style={{ width: `${pokemon.stats[1].base_stat}%` }}></div>
                             </div>
                         </div>
                         <div className={styles.defense}>
                             <h3>Defense</h3>
                             <div className={styles.bar}>
-                                <p>{pokemon.stats[2].base_stat}/100</p>
+                                <p>{pokemon.stats[2].base_stat}</p>
                                 <div className={styles.defense_bar} style={{ width: `${pokemon.stats[2].base_stat}%` }}></div>
                             </div>
                         </div>
                         <div className={styles.speed}>
                             <h3>Speed</h3>
                             <div className={styles.bar}>
-                                <p>{pokemon.stats[5].base_stat}/100</p>
+                                <p>{pokemon.stats[5].base_stat}</p>
                                 <div className={styles.speed_bar} style={{ width: `${pokemon.stats[5].base_stat}%` }}></div>
                             </div>
                         </div>

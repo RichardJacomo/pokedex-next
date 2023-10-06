@@ -1,37 +1,89 @@
 import styles from '../styles/Home.module.css'
 import Head from 'next/head'
 import Card from '../components/Card'
+import { useEffect, useState } from 'react'
 
-export async function getStaticProps() {
-    const maxPokemons = 100
-    const url = 'https://pokeapi.co/api/v2/pokemon/'
-    const res = await fetch(`${url}?&limit=${maxPokemons}`)
-    const data = await res.json()
+async function fetchPokemons(offset, limit) {
+    const url = `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`;
+    const res = await fetch(url);
+    const data = await res.json();
 
     data.results.forEach((e, i) => {
-        e.id = i + 1
-    })
+        const regex = /\/pokemon\/(\d+)\//
+        const match = e.url.match(regex)
+        if (match) {
+        e.id = match[1]
+        }
+    });
+
+    return data.results;
+}
+
+export async function getStaticProps() {
+    const initialLimit = 50;
+    const initialPokemons = await fetchPokemons(0, initialLimit);
     return {
         props: {
-            pokemons: data.results
+        pokemons: initialPokemons
         }
     }
 }
 
 export default function Home({ pokemons }) {
-    return (
-        <>
-            <Head>
-                <title>Home</title>
-            </Head>
-            <main className={styles.home}>
-                <h1>Pokedéx!</h1>
-                <ul className={styles.ul_list}>
-                { pokemons.map((e) => (
-                    <Card key={e.id} pokemon={e} />
-                ))}
-                </ul>
-            </main>
-        </>
-    )
-  }
+    const [offset, setOffset] = useState(50);
+    const [loading, setLoading] = useState(false);
+    const [newPokemons, setNewPokemons] = useState([]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop ===
+            document.documentElement.offsetHeight
+        ) {
+            loadMorePokemons();
+        }
+        };
+
+    const loadMorePokemons = async () => {
+      if (loading) return;
+      setLoading(true);
+      const limit = 50;
+      const newPokemonData = await fetchPokemons(offset, limit);
+
+      if (newPokemonData.length > 0) {
+        const filteredNewPokemonData = newPokemonData.filter((pokemon) => pokemon.id < 640);
+    
+        setNewPokemons((prevNewPokemons) => [...prevNewPokemons, ...filteredNewPokemonData]);
+        setOffset(offset + limit);
+      }
+
+      setLoading(false);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [offset, loading]);
+
+  return (
+    <>
+        <Head>
+            <title>Home</title>
+        </Head>
+        <main className={styles.home}>
+            <h1>Pokedéx!</h1>
+            <ul className={styles.ul_list}>
+            {pokemons.map((e) => (
+                <Card key={e.id} pokemon={e} />
+            ))}
+            {newPokemons.map((e) => (
+                <Card key={e.id} pokemon={e} />
+            ))}
+            {loading && <p>Carregando...</p>}
+            </ul>
+        </main>
+    </>
+  );
+}

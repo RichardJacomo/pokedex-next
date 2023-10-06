@@ -116,6 +116,7 @@
     background-color: rgb(0, 0, 0);
     border-radius: 10px;
     position: relative;
+    overflow: hidden;
 }  
 
 .speed_bar, .hp_bar, .attack_bar, .defense_bar {
