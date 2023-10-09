@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/404.module.css'
 import Link from 'next/link'
 export default function NotFound() {
     return (
@@ -10,7 +10,7 @@ export default function NotFound() {
             <main className={styles.home}>
                 <h1>404 - Page not found</h1>
                 <Link href="/">
-                   Go home
+                   Home
                 </Link>
             </main>
         </>

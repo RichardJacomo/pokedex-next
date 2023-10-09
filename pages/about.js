@@ -8,10 +8,13 @@ export default function About(){
                 <title>About</title>
             </Head>
             <main className={styles.about}>
-                <h1 className={styles.text}>Pokedéx é só mais um projeto de pokedéx qualquer criado apenas com o intuito de praticar Next.js</h1>
                 <figure>
                     <img className={styles.img} src="/images/pokeball.png"  alt='nature'/>
                 </figure>
+                <h1 className={styles.text}>O projeto Pokédex é uma aplicação que utiliza as 
+                    APIs da PokeAPI para obter informações detalhadas sobre Pokémon e a raw.githubusercontent.com/PokeAPI
+                    para obter imagens de alta qualidade desses Pokémon.
+                    Essa plicação foi criada com Next.js, React.js e CSS Modules com o intuito de praticar essas tecnologias.</h1>
             </main>
         </>
     )

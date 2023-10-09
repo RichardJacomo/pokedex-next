@@ -2,6 +2,7 @@ import styles from '../../styles/Pokemon.module.css'
 import Image from 'next/image'
 import getColor from '../../components/getColor'
 import { useRouter } from 'next/router'
+import Loading from '../../components/Loading'
 
 export async function getStaticPaths() {
     const maxPokemons = 50
@@ -24,10 +25,23 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     const pokemonId = context.params.pokemonId
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-    const data = await res.json()
-    return {
-        props: {
-            pokemon: data
+
+    if (!res.ok) {
+        return {
+            notFound: true,
+        }
+    }
+
+    try {
+        const data = await res.json();
+        return {
+            props: {
+                pokemon: data
+            }
+        }
+    } catch (error) {
+        return {
+            notFound: true,
         }
     }
 }
@@ -36,7 +50,7 @@ export default function Pokemon({ pokemon }) {
     const router = useRouter()
 
     if (router.isFallback) {
-        return <div>Carregando...</div>
+        return <Loading/>
     }
 
     return (

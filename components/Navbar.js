@@ -4,7 +4,10 @@ export default function Navbar() {
     return (
         <nav className={styles.navbar}>
             <figure>
-                <img className={styles.img} src="/images/pokeball.png"  alt='nature'/>
+                <Link className={styles.logo} href="/">
+                    <img className={styles.img} src="/images/pokeball.png"  alt='nature'/>
+                    <h1>Pokédex</h1>
+                </Link>
             </figure>
             <ul>
                 <li>

@@ -12,7 +12,7 @@ async function fetchPokemons(offset, limit) {
         const regex = /\/pokemon\/(\d+)\//
         const match = e.url.match(regex)
         if (match) {
-        e.id = match[1]
+            e.id = match[1]
         }
     });
 
@@ -24,7 +24,7 @@ export async function getStaticProps() {
     const initialPokemons = await fetchPokemons(0, initialLimit);
     return {
         props: {
-        pokemons: initialPokemons
+            pokemons: initialPokemons
         }
     }
 }
@@ -45,25 +45,25 @@ export default function Home({ pokemons }) {
         };
 
     const loadMorePokemons = async () => {
-      if (loading) return;
-      setLoading(true);
-      const limit = 50;
-      const newPokemonData = await fetchPokemons(offset, limit);
+        if (loading) return;
+        setLoading(true);
+        const limit = 50;
+        const newPokemonData = await fetchPokemons(offset, limit);
 
-      if (newPokemonData.length > 0) {
-        const filteredNewPokemonData = newPokemonData.filter((pokemon) => pokemon.id < 640);
-    
-        setNewPokemons((prevNewPokemons) => [...prevNewPokemons, ...filteredNewPokemonData]);
-        setOffset(offset + limit);
-      }
+        if (newPokemonData.length > 0) {
+            const filteredNewPokemonData = newPokemonData.filter((pokemon) => pokemon.id < 641);
+        
+            setNewPokemons((prevNewPokemons) => [...prevNewPokemons, ...filteredNewPokemonData]);
+            setOffset(offset + limit);
+        }
 
-      setLoading(false);
+        setLoading(false);
     };
 
     window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('scroll', handleScroll);
     };
   }, [offset, loading]);
 
@@ -73,7 +73,6 @@ export default function Home({ pokemons }) {
             <title>Home</title>
         </Head>
         <main className={styles.home}>
-            <h1>Pokedéx!</h1>
             <ul className={styles.ul_list}>
             {pokemons.map((e) => (
                 <Card key={e.id} pokemon={e} />
@@ -81,7 +80,6 @@ export default function Home({ pokemons }) {
             {newPokemons.map((e) => (
                 <Card key={e.id} pokemon={e} />
             ))}
-            {loading && <p>Carregando...</p>}
             </ul>
         </main>
     </>
